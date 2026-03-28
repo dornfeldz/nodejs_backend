@@ -25,6 +25,13 @@ app.use(cors({
 
 app.options(/.*/, cors());
 
+app.use((req, res, next) => {
+    if (req.method === 'OPTIONS') {
+        return res.sendStatus(200);
+    }
+    next();
+});
+
 startCronJobs()
 
 app.get('/', (req, res) => {
