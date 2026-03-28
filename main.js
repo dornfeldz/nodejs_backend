@@ -16,10 +16,7 @@ const clerkClient = createClerkClient({
 
 const app = express();
 
-app.use(cors({
-    origin: 'https://frontend-masolata.vercel.app',
-    credentials: true
-}))
+app.use(cors())
 
 startCronJobs()
 
