@@ -1,0 +1,60 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Ticker {
+  id          Int           @id @default(autoincrement())
+  symbol      String        @unique
+  name        String?
+  created_at  DateTime      @default(now())
+  predictions Prediction[]
+  users       UserStock[]
+}
+
+model Prediction {
+  id            Int       @id @default(autoincrement())
+  ticker        Ticker    @relation(fields: [ticker_id], references: [id])
+  ticker_id     Int
+  predicted_at  DateTime
+  model_version String
+  pred_day_1    Decimal
+  pred_day_2    Decimal
+  pred_day_3    Decimal
+  pred_day_4    Decimal
+  pred_day_5    Decimal
+  confidence    Decimal?
+  actual_day_1  Decimal?
+  actual_day_2  Decimal?
+  actual_day_3  Decimal?
+  actual_day_4  Decimal?
+  actual_day_5  Decimal?
+  created_at    DateTime  @default(now())
+
+  @@unique([ticker_id, predicted_at])
+}
+
+model User {
+  id              Int         @id @default(autoincrement())
+  clerk_id        String      @unique
+  stripe_id       String?     @unique
+  stripe_sub_id   String?     @unique
+  is_premium      Boolean     @default(false)
+  created_at      DateTime    @default(now())
+  stocks          UserStock[]
+}
+
+model UserStock {
+  id         Int      @id @default(autoincrement())
+  user_id    Int
+  symbol     String
+  created_at DateTime @default(now())
+
+  user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  ticker     Ticker   @relation(fields: [symbol], references: [symbol])
+
+  @@unique([user_id, symbol])
+}
