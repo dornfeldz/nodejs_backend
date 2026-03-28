@@ -46,8 +46,8 @@ router.post('/create-checkout-session', express.json(),async (req, res) => {
                     quantity: 1,
                 },
             ],
-            success_url: 'http://localhost:5173/',
-            cancel_url: 'http://localhost:5173/pricing',
+            success_url: process.env.STRIPE_SUCCESS_URL,
+            cancel_url: process.env.STRIPE_CANCEL_URL,
         })
 
         res.json({ url: session.url })
