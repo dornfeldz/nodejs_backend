@@ -17,7 +17,7 @@ const clerkClient = createClerkClient({
 const app = express();
 
 app.use(cors({
-    origin: ["https://frontend-masolata.vercel.app", "http://localhost:5173"],
+    origin: ["https://frontend-masolata.vercel.app", "http://localhost:5173", "https://www.forq.online"],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true
