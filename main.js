@@ -8,6 +8,7 @@ import { verifyToken, createClerkClient } from "@clerk/backend";
 import webhooksRouter from './routes/webhooks.js'
 import stripeRouter from './routes/stripe.js'
 import userRouter from './routes/user.js'
+import marketRouter from './routes/market.js'
 
 
 const clerkClient = createClerkClient({
@@ -43,6 +44,7 @@ app.use('/predictions', predictionsRouter)
 app.use('/webhooks', webhooksRouter)
 app.use('/stripe', stripeRouter)
 app.use('/user', userRouter)
+app.use("/market", marketRouter)
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => console.log(`Express server listening on port ${PORT}`))

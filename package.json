@@ -23,7 +23,8 @@
     "node-cron": "^4.2.1",
     "prisma": "^7.5.0",
     "stripe": "^20.4.1",
-    "svix": "^1.89.0"
+    "svix": "^1.89.0",
+    "yahoo-finance2": "^3.14.0"
   },
   "devDependencies": {
     "@types/node": "^25.5.0",
