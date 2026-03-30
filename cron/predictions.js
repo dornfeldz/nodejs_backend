@@ -26,7 +26,8 @@ export function startCronJobs() {
         try {
             await fetch(`${process.env.FASTAPI_URL}/train`, {
                 method: 'POST',
-                headers: { 'x-api-key': process.env.INTERNAL_API_KEY }
+                headers: { 'x-api-key': process.env.INTERNAL_API_KEY },
+                signal: AbortSignal.timeout(30 * 60 * 1000)
             })
             console.log('Retrain triggered successfully')
         } catch (err) {
