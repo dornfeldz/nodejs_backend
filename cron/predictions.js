@@ -4,7 +4,7 @@ import { savePredictions } from '../db/predictions.js'
 export function startCronJobs() {
 
     // every weekday at 6am
-    cron.schedule('0 * * * *', async () => {
+    cron.schedule('0 6 * * 1-5', async () => {
         console.log('Running daily prediction job...')
         try {
             const res = await fetch(`${process.env.FASTAPI_URL}/predict`, {
@@ -21,7 +21,7 @@ export function startCronJobs() {
 
     // '0 2 * * 1'
     // every monday at 2am
-    cron.schedule('30 * * * *', async () => {
+    cron.schedule('0 2 * * 1', async () => {
         console.log('Running weekly retrain job...')
         try {
             await fetch(`${process.env.FASTAPI_URL}/train`, {
